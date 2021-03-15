@@ -1,0 +1,25 @@
+
+
+{
+  "name": "myReactApp",
+  "version": "1.0.0",
+  "description": "my attept to use wasm with react",
+  "main": "index.js",
+  "repository": "https://github.com/code-c/wasm-with-react.git",
+  "author": "Codie Cottrell",
+  "license": "y",
+  "private": false,
+  "dependencies": {
+    "@babel/core": "^7.13.10",
+    "@babel/preset-env": "^7.13.10",
+    "@babel/preset-react": "^7.12.13",
+    "babel-loader": "^8.2.2",
+    "html-webpack-plugin": "^5.3.1",
+    "webpack": "^5.24.4",
+    "webpack-cli": "^4.5.0",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "scripts": {
+    "start": "webpack serve --mode development --env development"
+  }
+}
