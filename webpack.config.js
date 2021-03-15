@@ -13,7 +13,7 @@ module.exports = {
         })
     ],
     resolve: {
-        modules: [__dirname, 'src', 'node_modules'],
+        modules: [__dirname, 'public', 'src', 'node_modules'],
         extensions: ['*', '.js', '.jsx', '.tsx', '.ts'],
       },
     module: {
@@ -23,9 +23,19 @@ module.exports = {
                 exclude: /node_modules/,
                 loader: require.resolve('babel-loader')
             },
+
+            // use css loader for loading css?? 
             {
                 test:/\.css$/,
-                use:['style-loader','css-loader']
+                use:['style-loader','css-loader', 'sass-loader']
+            },
+            
+            // runs file loader when parsing image files
+            {
+                test: /\.(png|svg|jpg|gif)$/,
+                use: [
+                'file-loader'
+                ]
             }
         ]
     }
