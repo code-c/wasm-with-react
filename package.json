@@ -13,6 +13,7 @@
     "@babel/preset-react": "^7.12.13",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.1.2",
+    "file-system": "^2.2.2",
     "html-webpack-plugin": "^5.3.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -21,11 +22,9 @@
     "webpack-cli": "^4.5.0",
     "webpack-dev-server": "^3.11.2"
   },
-  
   "scripts": {
     "start": "webpack serve --mode development --env development"
   },
-
   "devDependencies": {
     "file-loader": "^6.2.0",
     "node-sass": "^5.0.0",

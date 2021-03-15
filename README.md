@@ -6,3 +6,6 @@ I started here at this webpage setting up everything except adding 'typescrpt' '
 https://medium.com/@tim.givois.mendez/create-a-react-project-from-scratch-without-create-react-app-f02fce4e05b
 
 
+to add the wasm files to the directories I ended up using this article:
+
+https://medium.com/@guptanikhil/using-webassembly-with-react-from-scratch-fba8cdfa5118
