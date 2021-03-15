@@ -7,14 +7,22 @@ import App from './App';
 import Hello from './external/Hello.js'; // lader doesnt like this line lets fix
 import HelloWASM from './external/Hello.wasm';
 
-const sample = Hello({
+const hello = Hello({
     locateFile: () => {
         return HelloWASM;
     },
 });
 
-// Hello.then((core) => {
-//     console.log(core.printHello());
-// });
+// fetch('./external/Hello.wasm').then(response => 
+//     response.arrayBuffer()
+//   ).then(bytes => 
+//     WebAssembly.instantiate(bytes)
+//   ).then(obj => {
+//       console.log(obj.instance.exports.my_func());
+//   });
+
+hello.then((core) => {
+    console.log(core.printHello());
+});
 
 ReactDOM.render(<App />, document.getElementById("root"))
