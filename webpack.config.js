@@ -2,14 +2,20 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 module.exports = {
-    entry: './src/index.js',
+    entry: 'index.js',
     output: {
-        filename: 'bundle.[hash].js',
+        filename: 'bundle.js', //filename: 'bundle.[hash].js',
         path: path.resolve(__dirname, 'dist')
+    },
+
+    // gets rid of errors ascociated with importing fs and path into the Hello.js files
+    externals: {
+        fs: 'empty',
+        path: 'empty',
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './public/index.html'
+            template: path.resolve(__dirname, 'public/index.html')
         })
     ],
     resolve: {
@@ -45,5 +51,4 @@ module.exports = {
             },
         ],
     },
-    //plugins: [new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'public/index.html') })],
 }
