@@ -21,9 +21,11 @@
     "webpack-cli": "^4.5.0",
     "webpack-dev-server": "^3.11.2"
   },
+  
   "scripts": {
     "start": "webpack serve --mode development --env development"
   },
+
   "devDependencies": {
     "file-loader": "^6.2.0",
     "node-sass": "^5.0.0",

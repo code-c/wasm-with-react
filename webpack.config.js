@@ -36,7 +36,14 @@ module.exports = {
                 use: [
                 'file-loader'
                 ]
-            }
-        ]
-    }
+            },
+                //adding wasm loading capability
+            {
+                test: /\.(wasm)$/,
+                loader: 'file-loader',
+                type: 'javascript/auto',
+            },
+        ],
+    },
+    //plugins: [new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'public/index.html') })],
 }
