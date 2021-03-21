@@ -1,7 +1,11 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
-module.exports = {
+module.exports = {    
+    // devServer: {
+    //     mimeTypes: { 'application/wasm' : ['wasm'] },
+    // },
+                
     entry: 'index.js',
     output: {
         filename: 'bundle.js', //filename: 'bundle.[hash].js',
@@ -48,6 +52,8 @@ module.exports = {
                 test: /\.(wasm)$/,
                 loader: 'file-loader',
                 type: 'javascript/auto',
+                //loader: 'wasm-loader',
+                //type: 'application/wasm',
             },
         ],
     },
