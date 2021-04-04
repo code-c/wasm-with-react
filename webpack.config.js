@@ -6,7 +6,7 @@ module.exports = {
     //     mimeTypes: { 'application/wasm' : ['wasm'] },
     // },
                 
-    entry: 'index.js',
+    entry: ["@babel/polyfill", "index.js"],
     output: {
         filename: 'bundle.js', //filename: 'bundle.[hash].js',
         path: path.resolve(__dirname, 'dist')
