@@ -9,3 +9,7 @@ https://medium.com/@tim.givois.mendez/create-a-react-project-from-scratch-withou
 to add the wasm files to the directories I ended up using this article:
 
 https://medium.com/@guptanikhil/using-webassembly-with-react-from-scratch-fba8cdfa5118
+
+ABOVE WORKED!! REALLY WELL now we want maybe some more functionality so I did this:
+
+ yarn add wasm-loader
