@@ -19,11 +19,11 @@ import FqInteractWASM from './external/fernQuestOut/FernQuestInteract.wasm';
 // });
 
 // // again this connects the two?
-const interact = FernQuestInteract({
-    locateFile: () => {
-        return FqInteractWASM;
-    },
-});
+// const interact = FernQuestInteract({
+//     locateFile: () => {
+//         return FqInteractWASM;
+//     },
+// });
 
 // // attempt to use the function outside of the "then" context
 // interact.then((core) => {
@@ -51,16 +51,16 @@ const theProgram = async () => {
     const playerMove = interact.playerMove();
     console.log('playerMove: ', playerMove);
 }
-let fq = {}
-const fernQuest = async () => {
-    const interact = await FernQuestInteract({
-        locateFile: () => {
-            return FqInteractWASM;
-        },
-    });
-    console.log('interact: ', interact);
-    return interact;
-}
+// let fq = {}
+// const fernQuest = async () => {
+//     const interact = await FernQuestInteract({
+//         locateFile: () => {
+//             return FqInteractWASM;
+//         },
+//     });
+//     console.log('interact: ', interact);
+//     return interact;
+// }
 
 
 // // again this connects the two?

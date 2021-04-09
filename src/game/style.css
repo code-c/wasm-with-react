@@ -1,0 +1,7 @@
+/* Styling for the game components */
+.game-container {
+    background-color: grey;
+    display: block;
+    width: 1000px;
+    height: 500px;
+}
