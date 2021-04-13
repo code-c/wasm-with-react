@@ -57,9 +57,9 @@ export default class DrawMap extends Component {
 
     render() {
         return (
-            <div classMap>
+            <div id ="classMap">
                 <img src={grass}></img>
-                </div>
+            </div>
         );
     }
 } 
