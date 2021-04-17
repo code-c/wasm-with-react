@@ -20,12 +20,17 @@ export default class Character extends PIXI.AnimatedSprite {
         this.hp=hp;
         this.y = y;
         this.x = x;
+        this.scale.x = 2;
+        this.scale.y = 2;
     }
 
     moveNorth() {
         direction = "north";
         if(!this.playing){
-            this.textures = playerSheet.walkNorth;
+            if(carrying){
+                this.textures = playerSheet.carryNorth;
+            }
+            else this.textures = playerSheet.walkNorth;
             this.play();
         }
         this.y -= speed;
@@ -34,7 +39,10 @@ export default class Character extends PIXI.AnimatedSprite {
     moveSouth() {
         direction = "south";
         if(!this.playing){
-            this.textures = playerSheet.walkSouth;
+            if(carrying){
+                this.textures = playerSheet.carrySouth;
+            }
+            else this.textures = playerSheet.walkSouth;
             this.play();
         }
         this.y += speed;
@@ -43,7 +51,10 @@ export default class Character extends PIXI.AnimatedSprite {
     moveEast() {
         direction = "east";
         if(!this.playing){
-            this.textures = playerSheet.walkEast;
+            if(carrying){
+                this.textures = playerSheet.carryEast;
+            }
+            else this.textures = playerSheet.walkEast;
             this.play();
         }
         this.x += speed;
@@ -52,10 +63,20 @@ export default class Character extends PIXI.AnimatedSprite {
     moveWest() {
         direction = "west";
         if(!this.playing){
-            this.textures = playerSheet.walkWest;
+            if(carrying){
+                this.textures = playerSheet.carryWest;
+            }
+            else this.textures = playerSheet.walkWest;
             this.play();
         }
         this.x -= speed;
+    }
+
+    itemPickPlace() {
+        if(carrying){
+            this.place();
+        } 
+        else this.pickup();
     }
 
     pickup() {
@@ -63,7 +84,6 @@ export default class Character extends PIXI.AnimatedSprite {
             switch(direction){
                 case "north":
                     this.textures = playerSheet.pickupNorth;
-                    this.textures.reverse;
                     this.play();
                     break;
                 case "south":
@@ -82,35 +102,35 @@ export default class Character extends PIXI.AnimatedSprite {
                     this.textures = playerSheet.pickupSouth;
 
             }
+            carrying = true;
         }
-        carrying = true;
     }
 
     place() {
         if(!this.playing){
             switch(direction){
                 case "north":
-                    this.textures = playerSheet.pickupNorth;
+                    this.textures = playerSheet.placeNorth;
                     this.play();
                     break;
                 case "south":
-                    this.textures = playerSheet.pickupSouth;
+                    this.textures = playerSheet.placeSouth;
                     this.play();
                     break;
                 case "east":
-                    this.textures = playerSheet.pickupEast;
+                    this.textures = playerSheet.placeEast;
                     this.play();
                     break;
                 case "west":
-                    this.textures = playerSheet.pickupWest;
+                    this.textures = playerSheet.placeWest;
                     this.play();
                     break;
                 default:
-                    this.textures = playerSheet.pickupSouth;
+                    this.textures = playerSheet.placeSouth;
 
             }
+            carrying = false;
         }
-        carrying = true;
     }
 }
 
@@ -186,30 +206,60 @@ function createPlayerSheet() {
         new PIXI.Texture.from('player-pickup-west-2.png')
     ];
 
+    //load placing directions from stylesheet
+    playerSheet["placeNorth"] = [
+        new PIXI.Texture.from('player-pickup-north-2.png'),
+        new PIXI.Texture.from('player-pickup-north-1.png'),
+        new PIXI.Texture.from('player-pickup-north-0.png'),
+        new PIXI.Texture.from('player-north-0.png')
+    ];
+    playerSheet["placeSouth"] = [
+        new PIXI.Texture.from('player-pickup-south-2.png'),
+        new PIXI.Texture.from('player-pickup-south-1.png'),
+        new PIXI.Texture.from('player-pickup-south-0.png'),
+        new PIXI.Texture.from('player-south-0.png')
+    ];
+    playerSheet["placeEast"] = [
+        new PIXI.Texture.from('player-pickup-east-2.png'),
+        new PIXI.Texture.from('player-pickup-east-1.png'),
+        new PIXI.Texture.from('player-pickup-east-0.png'),
+        new PIXI.Texture.from('player-east-0.png')
+    ];
+    playerSheet["placeWest"] = [
+        new PIXI.Texture.from('player-pickup-west-2.png'),
+        new PIXI.Texture.from('player-pickup-west-1.png'),
+        new PIXI.Texture.from('player-pickup-west-0.png'),
+        new PIXI.Texture.from('player-west-0.png')
+    ];
+
     //carrying directions from stylesheet
     playerSheet["carryNorth"] = [
         new PIXI.Texture.from('player-carry-north-0.png'),
         new PIXI.Texture.from('player-carry-north-1.png'),
         new PIXI.Texture.from('player-carry-north-2.png'),
-        new PIXI.Texture.from('player-carry-north-3.png')
+        new PIXI.Texture.from('player-carry-north-3.png'),
+        new PIXI.Texture.from('player-carry-north-0.png')
     ];
     playerSheet["carrySouth"] = [
         new PIXI.Texture.from('player-carry-south-0.png'),
         new PIXI.Texture.from('player-carry-south-1.png'),
         new PIXI.Texture.from('player-carry-south-2.png'),
-        new PIXI.Texture.from('player-carry-south-3.png')
+        new PIXI.Texture.from('player-carry-south-3.png'),
+        new PIXI.Texture.from('player-carry-south-0.png')
     ];
     playerSheet["carryEast"] = [
         new PIXI.Texture.from('player-carry-east-0.png'),
         new PIXI.Texture.from('player-carry-east-1.png'),
         new PIXI.Texture.from('player-carry-east-2.png'),
-        new PIXI.Texture.from('player-carry-east-3.png')
+        new PIXI.Texture.from('player-carry-east-3.png'),
+        new PIXI.Texture.from('player-carry-east-0.png')
     ];
     playerSheet["carryWest"] = [
         new PIXI.Texture.from('player-carry-west-0.png'),
         new PIXI.Texture.from('player-carry-west-1.png'),
         new PIXI.Texture.from('player-carry-west-2.png'),
-        new PIXI.Texture.from('player-carry-west-3.png')
+        new PIXI.Texture.from('player-carry-west-3.png'),
+        new PIXI.Texture.from('player-carry-west-0.png')
     ];
 
     playerSheet["acquire"] = [

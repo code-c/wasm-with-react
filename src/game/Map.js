@@ -65,14 +65,11 @@ export default class Map extends React.Component {
             // Setup rendering loop
             PIXI.Ticker.shared.add(() => renderer.render(stage));
             PIXI.Ticker.shared.add(gameLoop);
-
         
             makeTilemap();
-            //createCharacter();
         });
 
         function keysDown(keyEvent) {
-            console.log(keyEvent.keyCode);
             keys[keyEvent.keyCode] = true;
         }
 
@@ -81,7 +78,7 @@ export default class Map extends React.Component {
         }
 
         function gameLoop() {
-            
+    
             // W (north)
             if(keys["87"]) {
                 player2.moveNorth();
@@ -104,7 +101,7 @@ export default class Map extends React.Component {
 
             // shift (pickUp)
             if (keys["16"]) {
-                player2.pickup();
+                player2.itemPickPlace();
             }
         }
 
