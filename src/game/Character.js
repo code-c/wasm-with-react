@@ -1,3 +1,7 @@
+/* Character.js
+a character class for FernQuest
+author: Codie Cottrell
+*/
 import * as PIXI from "pixi.js";
 
 let playerSheet = {};
