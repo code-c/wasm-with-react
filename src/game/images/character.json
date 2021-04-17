@@ -269,7 +269,7 @@
   },
   
   "player-carry-south-0.png": {
-    "frame": {"x": 143, "y": 5, "w": 17, "h": 24 },
+    "frame": {"x": 144, "y": 5, "w": 16, "h": 24 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": {"x": 143, "y": 5, "w": 17, "h": 24 },
@@ -278,7 +278,7 @@
   },
   
   "player-carry-south-1.png": {
-    "frame": {"x": 159, "y": 5, "w": 17, "h": 24 },
+    "frame": {"x": 160, "y": 5, "w": 16, "h": 24 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": {"x": 159, "y": 5, "w": 17, "h": 24 },
@@ -287,7 +287,7 @@
   },
   
   "player-carry-south-2.png": {
-    "frame": {"x": 176, "y": 5, "w": 17, "h": 24 },
+    "frame": {"x": 176, "y": 5, "w": 16, "h": 24 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": {"x": 176, "y": 5, "w": 17, "h": 24 },
@@ -296,7 +296,7 @@
   },
   
   "player-carry-south-3.png": {
-    "frame": {"x": 191, "y": 5, "w": 18, "h": 24 },
+    "frame": {"x": 192, "y": 5, "w": 16, "h": 24 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": {"x": 191, "y": 5, "w": 18, "h": 24 },
@@ -341,7 +341,7 @@
   },
   
   "player-carry-north-0.png": {
-    "frame": {"x": 143, "y": 68, "w": 17, "h": 25 },
+    "frame": {"x": 144, "y": 68, "w": 16, "h": 25 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": {"x": 143, "y": 68, "w": 17, "h": 25 },
@@ -350,7 +350,7 @@
   },
   
   "player-carry-north-1.png": {
-    "frame": {"x": 160, "y": 68, "w": 17, "h": 25 },
+    "frame": {"x": 160, "y": 68, "w": 16, "h": 25 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": {"x": 160, "y": 68, "w": 17, "h": 25 },
