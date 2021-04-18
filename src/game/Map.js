@@ -2,7 +2,7 @@ import React from 'react';
 import * as PIXI from "pixi.js";
 import { Loader } from '@pixi/loaders';
 import { CompositeTilemap, Tilemap } from '@pixi/tilemap';
-import grass from "./images/tiles/grass2.png";
+//import grass from "./images/tiles/grass2.png";
 import shadow from "./images/shadow.png";
 import tileSheet from './images/StaticTiles.json';
 // fernQuest WebAssembly
@@ -22,7 +22,7 @@ export default class Map extends React.Component {
             autoDensity: true,
             resolution: window.devicePixelRatio || 1,
             width: 800,
-            height: 600,
+            height: 608,
         });
         
         // declare variables being used
@@ -48,7 +48,7 @@ export default class Map extends React.Component {
         const loader = new PIXI.Loader();
         
         // add resources to the loader to use later
-        loader.add('atlas', './src/game/images/StaticTiles.json'); //tiles
+        loader.add('atlas', './src/game/images/Overworld.json'); //tiles
         loader.add('character', './src/game/images/character.json'); //character
 
 
@@ -78,7 +78,11 @@ export default class Map extends React.Component {
         }
 
         function gameLoop() {
-    
+            
+            // query backend collision system
+            // grab player location
+            //detectCollision(player.x, player.y)
+
             // W (north)
             if(keys["87"]) {
                 player2.moveNorth();
@@ -121,6 +125,47 @@ export default class Map extends React.Component {
         
         function makeTilemap() {
             // Clear the tilemap, in case it is being reused.
+            let tileLayout = " \
+            g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, \
+            g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, \
+            g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, \
+            g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, \
+            g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, \
+            g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, \
+            g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, \
+            g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, \
+            g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, b, b, g, g, g, \
+            g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, b, w, w, b, g, g, \
+            g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, b, b, b, b, b, b, g, g, b, b, b, b, b, b, b, b, b, w, w, w, w, b, g, \
+            g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, b, w, w, w, w, w, w, b, b, w, w, w, w, w, w, w, w, w, w, w, w, w, w, b, \
+            g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, b, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, \
+            g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, b, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, b, b, w, w, w, \
+            b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, b, g, g, b, w, w, \
+            w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, b, b, b, b, b, b, w, w, b, b, b, b, b, b, b, b, b, g, g, g, g, b, w, \
+            w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, b, g, g, g, g, g, g, b, b, g, g, g, g, g, g, g, g, g, g, g, g, g, g, b, \
+            w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, b, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, \
+            w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, b, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, \
+            b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, \
+            g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, \
+            g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, \
+            g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, \
+            g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, \
+            g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, \
+            g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, \
+            g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, \
+            g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, \
+            g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, \
+            g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, \
+            g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, \
+            g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, \
+            g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, \
+            g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, \
+            g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, \
+            g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, \
+            g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, \
+            g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, \
+            g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, \
+            "
             tilemap.clear();
         
             const size = 16;
@@ -132,15 +177,43 @@ export default class Map extends React.Component {
             const tileH = pxH / size;
         
             // Fill the scene with grass
-            for (let i = 0; i < tileW; i++) {
-                for (let j = 0; j < tileH; j++) {
-                    tilemap.tile(
-                        (j < tileH) && (i % 2 === 1) && (j % 2 === 1)
-                            ? 'grass-0'
-                            : 'grass-2',
-                        i * size,
-                        j * size,
-                    );
+            // for (let i = 0; i < tileW; i++) {
+            //     for (let j = 0; j < tileH; j++) {
+            //         tilemap.tile(
+            //             (j < tileH) && (i % 2 === 1) && (j % 2 === 1)
+            //                 ? 'grass-0'
+            //                 : 'grass-2',
+            //             i * size,
+            //             j * size,
+            //         );
+            //     }
+            // }
+
+            let i = 0;
+            let j = 0;
+            tileloop: for(let tileChar of tileLayout){
+                switch(tileChar){
+                    case " " || ",":
+                        continue tileloop;
+                    case "g":
+                        tilemap.tile('grass-0', i*size, j*size);
+                        break;
+                    case "w":
+                        tilemap.tile('grass-waterEdge-4', i*size, j*size);
+                        break;
+                    case "b":
+                        tilemap.tile("grass-waterEdge-1", i*size, j*size);
+                        break;
+                    default:
+                        continue tileloop;
+                }
+                if (i < tileW) {
+                    i++
+                } else if (i = tileW && j < tileH){
+                    j++;
+                    i=0;
+                } else if(i == tileW && j == tileH) {
+                    break tileloop;
                 }
             }
             // Button does not appear in the atlas, but @pixi/tilemap won't surrender
