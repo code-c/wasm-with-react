@@ -16,7 +16,7 @@ export default class Character extends PIXI.AnimatedSprite {
         createPlayerSheet();
         super(playerSheet.standSouth);
         //work with it set values
-        this.animationSpeed = .2;
+        this.animationSpeed = .3;
         this.anchor.set(0.5);
         this.loop = false;
         this.name = name;
@@ -160,28 +160,24 @@ function createPlayerSheet() {
 
     //load walking directions from stylesheet
     playerSheet["walkNorth"] = [
-        new PIXI.Texture.from('player-north-0.png'),
         new PIXI.Texture.from('player-north-1.png'),
         new PIXI.Texture.from('player-north-2.png'),
         new PIXI.Texture.from('player-north-3.png'),
         new PIXI.Texture.from('player-north-0.png')
     ];
     playerSheet["walkSouth"] = [
-        new PIXI.Texture.from('player-south-0.png'),
         new PIXI.Texture.from('player-south-1.png'),
         new PIXI.Texture.from('player-south-2.png'),
         new PIXI.Texture.from('player-south-3.png'),
         new PIXI.Texture.from('player-south-0.png')
     ];
     playerSheet["walkEast"] = [
-        new PIXI.Texture.from('player-east-0.png'),
         new PIXI.Texture.from('player-east-1.png'),
         new PIXI.Texture.from('player-east-2.png'),
         new PIXI.Texture.from('player-east-3.png'),
         new PIXI.Texture.from('player-east-0.png')
     ];
     playerSheet["walkWest"] = [
-        new PIXI.Texture.from('player-west-0.png'),
         new PIXI.Texture.from('player-west-1.png'),
         new PIXI.Texture.from('player-west-2.png'),
         new PIXI.Texture.from('player-west-3.png'),
@@ -238,28 +234,24 @@ function createPlayerSheet() {
 
     //carrying directions from stylesheet
     playerSheet["carryNorth"] = [
-        new PIXI.Texture.from('player-carry-north-0.png'),
         new PIXI.Texture.from('player-carry-north-1.png'),
         new PIXI.Texture.from('player-carry-north-2.png'),
         new PIXI.Texture.from('player-carry-north-3.png'),
         new PIXI.Texture.from('player-carry-north-0.png')
     ];
     playerSheet["carrySouth"] = [
-        new PIXI.Texture.from('player-carry-south-0.png'),
         new PIXI.Texture.from('player-carry-south-1.png'),
         new PIXI.Texture.from('player-carry-south-2.png'),
         new PIXI.Texture.from('player-carry-south-3.png'),
         new PIXI.Texture.from('player-carry-south-0.png')
     ];
     playerSheet["carryEast"] = [
-        new PIXI.Texture.from('player-carry-east-0.png'),
         new PIXI.Texture.from('player-carry-east-1.png'),
         new PIXI.Texture.from('player-carry-east-2.png'),
         new PIXI.Texture.from('player-carry-east-3.png'),
         new PIXI.Texture.from('player-carry-east-0.png')
     ];
     playerSheet["carryWest"] = [
-        new PIXI.Texture.from('player-carry-west-0.png'),
         new PIXI.Texture.from('player-carry-west-1.png'),
         new PIXI.Texture.from('player-carry-west-2.png'),
         new PIXI.Texture.from('player-carry-west-3.png'),
